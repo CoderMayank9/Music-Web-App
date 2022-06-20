@@ -6,6 +6,8 @@ leftwristx=0;
 leftwristy=0;
 rightwristx=0;
 rigthwristy=0;
+song1status="";
+song2status="";
 function preload()
 {
 song1=loadSound("believer.mp3");
@@ -40,15 +42,29 @@ rightwristy=results[0].pose.rightWrist.y;
 function draw()
 {
 image(video,0,0,600,500);
+song1status=song1.isPlaying();
+song2status=song2.isPlaying();
 fill("#FF0000");
 stroke("#FF0000");
 if(scorerightwrist>0.2)
 {
 circle(rightwristx,rightwristy,20);
+song1.stop();
+if(song2status==false)
+{
+song2.play();
+document.getElementById("song_name").innerHTML="Playing Rule The World Song";
+}
 }
 if(scoreleftwrist>0.2)
 {
 circle(leftwristx,leftwristy,20);
+song2.stop();
+if(song1status==false)
+{
+song1.play();
+document.getElementById("song_name").innerHTML="Playing Believer Song";
+}
 }
 }
 function play()
